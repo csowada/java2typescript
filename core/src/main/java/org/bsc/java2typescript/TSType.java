@@ -25,6 +25,9 @@ public class TSType extends HashMap<String, Object> {
     private static final String NAMESPACE = "namespace";
     private static final String FUNCTIONAL = "functional";
 
+    private static final String NO_DTS = "nodts";
+    private static final String INCLUDE_SUPER = "includeSuper";
+
     protected TSType() {
         super(3);
     }
@@ -59,6 +62,40 @@ public class TSType extends HashMap<String, Object> {
      */
     public TSType setExport(boolean value) {
         super.put(EXPORT, value);
+        return this;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public boolean isNoDts() {
+        return (boolean) super.getOrDefault(NO_DTS, false);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public TSType setNoDts(boolean value) {
+        super.put(NO_DTS, value);
+        return this;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public boolean isIncludeSuper() {
+        return (boolean) super.getOrDefault(INCLUDE_SUPER, false);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public TSType setIncludeSuper(boolean value) {
+        super.put(INCLUDE_SUPER, value);
         return this;
     }
 

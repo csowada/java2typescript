@@ -17,4 +17,7 @@ public @interface Type {
 	boolean export()		default false ;
 	String alias()			default "";
 	boolean functional()	default false;
+
+	boolean nodts()			default false;
+	boolean includeSuper()  default false;
 }

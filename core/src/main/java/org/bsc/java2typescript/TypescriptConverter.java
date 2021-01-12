@@ -59,6 +59,10 @@ public class TypescriptConverter extends TypescriptConverterStatic {
      */
     public String processStatic(TSType type, java.util.Map<String, TSType> declaredTypeMap) {
 
+        if (type.isNoDts()) {
+            System.out.println("Skip ..............................");
+        }
+
         final Context ctx = new Context(type, declaredTypeMap);
 
         ctx.append("interface ").append(ctx.type.getSimpleTypeName()).append("Static {\n\n");
@@ -284,14 +288,20 @@ public class TypescriptConverter extends TypescriptConverterStatic {
 
             if (inherited.length() > 0 || type.hasAlias()) {
 
-                sb.append("/*");
+                if (!type.isIncludeSuper()) {
+                    sb.append("/*");
+                    System.out.println("Uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+                }
 
                 if (type.hasAlias())
                     sb.append(type.getValue().getName());
+                    
                 if (inherited.length() > 0)
                     sb.append(inherited);
 
-                sb.append("*/");
+                if (!type.isIncludeSuper()) {
+                    sb.append("*/");
+                }
             }
 
             sb.append(" {");
@@ -406,6 +416,10 @@ public class TypescriptConverter extends TypescriptConverterStatic {
      * @return
      */
     public String processClass(int level, TSType tstype, java.util.Map<String, TSType> declaredTypeMap) {
+
+        if (tstype.isNoDts()) {
+            System.out.println("Skip ..............................");
+        }
 
         final Context ctx = contextOf(tstype, declaredTypeMap, compatibility);
 

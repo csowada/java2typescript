@@ -144,12 +144,14 @@ public class TypescriptProcessor extends AbstractProcessorEx {
 		    
 			types.stream()
 				.filter( tt -> !PREDEFINED_TYPES.contains(tt) )
+				.filter( tt -> !tt.isNoDts() )
 				.map( tt -> converter.processClass( 0, tt, declaredTypes))
 				.forEach( wD_append );
 
 			wT.append( "/// <reference path=\"").append(definitionsFile).append("\"/>" ).append( "\n\n");
 			types.stream()
 				.filter( t -> t.isExport() )
+				.filter( t -> !t.isNoDts() )
 				.map( t -> converter.processStatic( t, declaredTypes))
 				.forEach( wT_append );
 
